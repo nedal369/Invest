@@ -1,0 +1,617 @@
+/* ─── Variables ─────────────────────────────────────────────────────────────── */
+:root {
+    --bg-primary: #0d1b2e;
+    --bg-secondary: #162040;
+    --bg-card: #1a2b4a;
+    --bg-card-hover: #1e3254;
+    --accent-gold: #d4a820;
+    --accent-gold-light: #f0c842;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.65);
+    --text-muted: rgba(255, 255, 255, 0.35);
+    --positive: #22c55e;
+    --negative: #ef4444;
+    --orange: #f97316;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --font-arabic: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+    font-family: var(--font-arabic);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    direction: rtl;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent-gold); text-decoration: none; }
+
+/* ─── Login Page ────────────────────────────────────────────────────────────── */
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0d1b2e 0%, #1a2b4a 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.moon-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 12px rgba(212, 168, 32, 0.5));
+}
+
+.login-header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.form-group input {
+    background: var(--bg-secondary);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.4em;
+    text-align: center;
+    transition: border-color 0.2s;
+    width: 100%;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 168, 32, 0.15);
+}
+
+.form-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────────────────── */
+.btn {
+    padding: 14px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-arabic);
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--accent-gold);
+    color: var(--bg-primary);
+}
+
+.btn-primary:hover { background: var(--accent-gold-light); transform: translateY(-1px); }
+
+.btn-full { width: 100%; }
+
+/* ─── Alert ─────────────────────────────────────────────────────────────────── */
+.alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* ─── Dashboard Layout ──────────────────────────────────────────────────────── */
+.dashboard-page {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+.app-header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.header-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.moon-icon-sm { font-size: 20px; }
+
+.header-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.member-name {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.logout-btn {
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: background 0.2s;
+}
+
+.logout-btn:hover { background: rgba(239, 68, 68, 0.2); color: var(--negative); }
+
+.main-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ─── Card ──────────────────────────────────────────────────────────────────── */
+.card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.section-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0 4px;
+    margin-top: 4px;
+}
+
+/* ─── Welcome Card ──────────────────────────────────────────────────────────── */
+.welcome-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #1a2b4a 0%, #162040 100%);
+    border: 1px solid rgba(212, 168, 32, 0.2);
+}
+
+.welcome-info h2 {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+}
+
+.fund-badge {
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    background: rgba(212, 168, 32, 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.units-badge {
+    text-align: center;
+    background: rgba(212, 168, 32, 0.1);
+    border: 2px solid var(--accent-gold);
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+}
+
+.units-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    line-height: 1;
+}
+
+.units-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* ─── Stats Grid ────────────────────────────────────────────────────────────── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.stat-icon { font-size: 20px; margin-bottom: 8px; }
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.stat-value.gold { color: var(--accent-gold); }
+.stat-value.positive { color: var(--positive); }
+.stat-value.negative { color: var(--negative); }
+
+.stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.stat-unit {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* ─── My Share Card ─────────────────────────────────────────────────────────── */
+.my-share-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212,168,32,0.05) 100%);
+}
+
+.share-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.share-pct-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.pct-ring {
+    width: 80px;
+    height: 80px;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255,255,255,0.1);
+    stroke-width: 8;
+}
+
+.ring-fill {
+    fill: none;
+    stroke: var(--accent-gold);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.8s ease;
+}
+
+.pct-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+}
+
+.share-details { flex: 1; }
+
+.share-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.share-row:last-child { border-bottom: none; }
+
+.share-label { font-size: 0.82rem; color: var(--text-secondary); }
+
+.share-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.share-value.gold { color: var(--accent-gold); }
+.share-value.positive { color: var(--positive); }
+.share-value.negative { color: var(--negative); }
+
+/* ─── Payment Section ───────────────────────────────────────────────────────── */
+.payment-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ps-item { text-align: center; }
+.ps-value {
+    display: block;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+.ps-value.positive { color: var(--positive); }
+.ps-value.negative { color: var(--negative); }
+.ps-label { font-size: 0.7rem; color: var(--text-muted); }
+
+.payment-list { display: flex; flex-direction: column; gap: 6px; }
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.payment-date { font-size: 0.82rem; color: var(--text-secondary); min-width: 60px; }
+.payment-amount { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+
+.payment-status {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.status-paid { background: rgba(34,197,94,0.15); color: var(--positive); }
+.status-pending { background: rgba(249,115,22,0.15); color: var(--orange); }
+.status-late { background: rgba(239,68,68,0.15); color: var(--negative); }
+.status-partial { background: rgba(234,179,8,0.15); color: #eab308; }
+
+/* ─── Loan Card ─────────────────────────────────────────────────────────────── */
+.loan-card {}
+
+.loan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.loan-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+}
+
+.loan-label { font-size: 0.78rem; color: var(--text-muted); }
+
+.completion-ring-container {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.completion-ring {
+    width: 64px;
+    height: 64px;
+    transform: rotate(-90deg);
+}
+
+.ring-fill-green {
+    fill: none;
+    stroke: var(--positive);
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.completion-pct {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--positive);
+}
+
+.loan-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ls-item { text-align: center; }
+.ls-value { display: block; font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+.ls-value.positive { color: var(--positive); }
+.ls-label { font-size: 0.68rem; color: var(--text-muted); }
+
+.next-payment {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(249,115,22,0.1);
+    border: 1px solid rgba(249,115,22,0.2);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--orange);
+}
+
+.next-payment.overdue {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.3);
+    color: var(--negative);
+}
+
+/* ─── Zakat Card ────────────────────────────────────────────────────────────── */
+.zakat-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212,168,32,0.08) 100%);
+    border-color: rgba(212, 168, 32, 0.25);
+}
+
+.zakat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.zakat-icon { font-size: 28px; }
+.zakat-due { font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); }
+.zakat-label { font-size: 0.78rem; color: var(--text-muted); }
+
+.zakat-paid-badge {
+    margin-right: auto;
+    background: rgba(34,197,94,0.15);
+    color: var(--positive);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.zakat-base { font-size: 0.82rem; color: var(--text-secondary); }
+
+/* ─── Fund Stats Footer ─────────────────────────────────────────────────────── */
+.fund-stats-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+}
+
+.fs-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.fs-icon { font-size: 18px; }
+.fs-text { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ─── Footer ────────────────────────────────────────────────────────────────── */
+.app-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+    margin-top: 20px;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 400px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .login-card { padding: 28px 20px; }
+    .stat-value { font-size: 1.1rem; }
+    .main-content { padding: 10px; }
+}
+
+@media (min-width: 600px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+}

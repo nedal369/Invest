@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>لوحة المعلومات - {{ member.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="theme-color" content="#0d1b2e">
+</head>
+<body class="dashboard-page">
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-right">
+                <span class="moon-icon-sm">🌙</span>
+                <span class="header-title">استثماراتي</span>
+            </div>
+            <div class="header-left">
+                <span class="member-name">{{ member.name }}</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn" title="تسجيل خروج">⏻</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Welcome Card -->
+        <div class="welcome-card card">
+            <div class="welcome-info">
+                <h2>مرحباً، {{ member.name }}</h2>
+                <p class="fund-badge">{{ member.fund_name }}</p>
+            </div>
+            <div class="units-badge">
+                <span class="units-number">{{ member.units }}</span>
+                <span class="units-label">وحدة</span>
+            </div>
+        </div>
+
+        <!-- Fund Summary Cards -->
+        <div class="section-title">ملخص الصندوق</div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value gold">{{ "{:,.2f}".format(fund_summary.total_value) }}</div>
+                <div class="stat-label">إجمالي قيمة الصندوق</div>
+                <div class="stat-unit">ر.س</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value {% if fund_summary.total_return >= 0 %}positive{% else %}negative{% endif %}">
+                    {{ "{:,.2f}".format(fund_summary.total_return) }}
+                </div>
+                <div class="stat-label">الربح / الخسارة</div>
+                <div class="stat-unit">ر.س</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value {% if fund_summary.return_pct >= 0 %}positive{% else %}negative{% endif %}">
+                    {{ "{:+.2f}".format(fund_summary.return_pct) }}%
+                </div>
+                <div class="stat-label">العائد الإجمالي</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🏷️</div>
+                <div class="stat-value gold">{{ "{:,.2f}".format(fund_summary.nav_per_unit) }}</div>
+                <div class="stat-label">قيمة الوحدة (NAV)</div>
+                <div class="stat-unit">ر.س</div>
+            </div>
+        </div>
+
+        <!-- My Share Card -->
+        {% set total_units = fund_summary.total_units %}
+        {% set share_pct = (member.units / total_units * 100) if total_units > 0 else 0 %}
+        {% set share_value = fund_summary.total_value * share_pct / 100 %}
+        {% set share_return = fund_summary.total_return * share_pct / 100 %}
+
+        <div class="section-title">حصتي في الصندوق</div>
+        <div class="my-share-card card">
+            <div class="share-header">
+                <div class="share-pct-circle">
+                    <svg viewBox="0 0 100 100" class="pct-ring">
+                        <circle cx="50" cy="50" r="40" class="ring-bg"/>
+                        <circle cx="50" cy="50" r="40" class="ring-fill"
+                            style="stroke-dasharray: {{ share_pct * 2.51327 }} 251.327;"/>
+                    </svg>
+                    <span class="pct-text">{{ "{:.1f}".format(share_pct) }}%</span>
+                </div>
+                <div class="share-details">
+                    <div class="share-row">
+                        <span class="share-label">قيمة حصتي</span>
+                        <span class="share-value gold">{{ "{:,.2f}".format(share_value) }} ر.س</span>
+                    </div>
+                    <div class="share-row">
+                        <span class="share-label">ربحي</span>
+                        <span class="share-value {% if share_return >= 0 %}positive{% else %}negative{% endif %}">
+                            {{ "{:+,.2f}".format(share_return) }} ر.س
+                        </span>
+                    </div>
+                    <div class="share-row">
+                        <span class="share-label">وحداتي</span>
+                        <span class="share-value">{{ member.units }} / {{ total_units }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment History -->
+        <div class="section-title">سجل الدفعات</div>
+        <div class="card">
+            <div class="payment-stats">
+                <div class="ps-item">
+                    <span class="ps-value">{{ "{:,.2f}".format(payment_history.total_paid) }}</span>
+                    <span class="ps-label">إجمالي المدفوع (ر.س)</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-value {% if payment_history.late_count > 0 %}negative{% else %}positive{% endif %}">
+                        {{ payment_history.late_count }}
+                    </span>
+                    <span class="ps-label">تأخيرات</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-value positive">{{ payment_history.payment_rate }}%</span>
+                    <span class="ps-label">نسبة الالتزام</span>
+                </div>
+            </div>
+
+            <div class="payment-list">
+                {% for payment in payment_history.payments[:12] %}
+                <div class="payment-item">
+                    <div class="payment-date">
+                        {{ payment.due_date[:7] if payment.due_date else '—' }}
+                    </div>
+                    <div class="payment-amount">
+                        {{ "{:,.0f}".format(payment.due_amount) }} ر.س
+                    </div>
+                    <div class="payment-status status-{{ payment.status|lower }}">
+                        {% if payment.status == 'PAID' %}مدفوع ✓
+                        {% elif payment.status == 'PENDING' %}معلق
+                        {% elif payment.status == 'LATE' %}متأخر
+                        {% elif payment.status == 'PARTIAL' %}جزئي
+                        {% else %}{{ payment.status }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Loan Section -->
+        {% if loan_info.has_loan %}
+        <div class="section-title">القرض الحسن</div>
+        <div class="loan-card card">
+            <div class="loan-header">
+                <div>
+                    <div class="loan-amount">{{ "{:,.2f}".format(loan_info.loan.principal) }} ر.س</div>
+                    <div class="loan-label">القرض الأصلي</div>
+                </div>
+                <div class="loan-completion">
+                    <div class="completion-ring-container">
+                        <svg viewBox="0 0 80 80" class="completion-ring">
+                            <circle cx="40" cy="40" r="32" class="ring-bg"/>
+                            <circle cx="40" cy="40" r="32" class="ring-fill-green"
+                                style="stroke-dasharray: {{ loan_info.completion_pct * 2.01 }} 201;"/>
+                        </svg>
+                        <span class="completion-pct">{{ loan_info.completion_pct }}%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loan-stats">
+                <div class="ls-item">
+                    <span class="ls-value positive">{{ "{:,.2f}".format(loan_info.total_paid) }}</span>
+                    <span class="ls-label">مسدد (ر.س)</span>
+                </div>
+                <div class="ls-item">
+                    <span class="ls-value">{{ "{:,.2f}".format(loan_info.remaining) }}</span>
+                    <span class="ls-label">متبقي (ر.س)</span>
+                </div>
+                <div class="ls-item">
+                    <span class="ls-value">{{ loan_info.installments_paid }}/{{ loan_info.installments_total }}</span>
+                    <span class="ls-label">الأقساط</span>
+                </div>
+            </div>
+
+            {% if loan_info.next_payment %}
+            <div class="next-payment {% if loan_info.overdue_count > 0 %}overdue{% endif %}">
+                <span class="np-icon">{% if loan_info.overdue_count > 0 %}⚠️{% else %}📅{% endif %}</span>
+                <span>
+                    {% if loan_info.overdue_count > 0 %}
+                        متأخر {{ loan_info.overdue_count }} قسط
+                    {% else %}
+                        القسط القادم: {{ loan_info.next_payment.due_date[:10] if loan_info.next_payment else '' }}
+                        ({{ "{:,.2f}".format(loan_info.next_payment.due_amount) }} ر.س)
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Zakat Section -->
+        {% if zakat_info.has_zakat %}
+        <div class="section-title">زكاتي في الصندوق</div>
+        <div class="zakat-card card">
+            <div class="zakat-header">
+                <span class="zakat-icon">🌙⭐</span>
+                <div>
+                    <div class="zakat-due">{{ "{:,.2f}".format(zakat_info.zakat_due) }} ر.س</div>
+                    <div class="zakat-label">الزكاة المستحقة عليك</div>
+                </div>
+                {% if zakat_info.is_paid %}
+                <div class="zakat-paid-badge">مخرجة ✓</div>
+                {% endif %}
+            </div>
+            <div class="zakat-base">
+                وعاء زكاتك: {{ "{:,.2f}".format(zakat_info.zakat_base) }} ر.س
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Fund Stats Footer -->
+        <div class="fund-stats-footer card">
+            <div class="fs-item">
+                <span class="fs-icon">👥</span>
+                <span class="fs-text">{{ fund_summary.member_count }} عضو</span>
+            </div>
+            <div class="fs-item">
+                <span class="fs-icon">📅</span>
+                <span class="fs-text">استحقاق يوم {{ fund_summary.payment_day }}</span>
+            </div>
+            <div class="fs-item">
+                <span class="fs-icon">💵</span>
+                <span class="fs-text">{{ "{:,.0f}".format(fund_summary.unit_price) }} ر.س/وحدة</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>للعرض فقط • آخر تحديث: {{ now }}</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

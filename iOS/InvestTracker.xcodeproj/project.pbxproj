@@ -1,0 +1,368 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA001 /* InvestTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001 /* InvestTrackerApp.swift */; };
+		AA002 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB002 /* AppState.swift */; };
+		AA003 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB003 /* Asset.swift */; };
+		AA004 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB004 /* Transaction.swift */; };
+		AA005 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB005 /* Portfolio.swift */; };
+		AA006 /* Fund.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB006 /* Fund.swift */; };
+		AA007 /* Zakat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007 /* Zakat.swift */; };
+		AA008 /* Loan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB008 /* Loan.swift */; };
+		AA009 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB009 /* DatabaseManager.swift */; };
+		AA010 /* PriceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB010 /* PriceService.swift */; };
+		AA011 /* ZakatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB011 /* ZakatService.swift */; };
+		AA012 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB012 /* OCRService.swift */; };
+		AA013 /* ExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB013 /* ExportService.swift */; };
+		AA014 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB014 /* NotificationManager.swift */; };
+		AA015 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB015 /* ContentView.swift */; };
+		AA016 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB016 /* DashboardView.swift */; };
+		AA017 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB017 /* PortfolioView.swift */; };
+		AA018 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB018 /* AddTransactionView.swift */; };
+		AA019 /* AssetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB019 /* AssetDetailView.swift */; };
+		AA020 /* FundsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020 /* FundsListView.swift */; };
+		AA021 /* ZakatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB021 /* ZakatView.swift */; };
+		AA022 /* LoansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB022 /* LoansView.swift */; };
+		AA023 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB023 /* ReportsView.swift */; };
+		AA024 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB024 /* SettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BB001 /* InvestTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/InvestTrackerApp.swift"; sourceTree = "<group>"; };
+		BB002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/AppState.swift"; sourceTree = "<group>"; };
+		BB003 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Asset.swift"; sourceTree = "<group>"; };
+		BB004 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Transaction.swift"; sourceTree = "<group>"; };
+		BB005 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Portfolio.swift"; sourceTree = "<group>"; };
+		BB006 /* Fund.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Fund.swift"; sourceTree = "<group>"; };
+		BB007 /* Zakat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Zakat.swift"; sourceTree = "<group>"; };
+		BB008 /* Loan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Loan.swift"; sourceTree = "<group>"; };
+		BB009 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/DatabaseManager.swift"; sourceTree = "<group>"; };
+		BB010 /* PriceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/PriceService.swift"; sourceTree = "<group>"; };
+		BB011 /* ZakatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ZakatService.swift"; sourceTree = "<group>"; };
+		BB012 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/OCRService.swift"; sourceTree = "<group>"; };
+		BB013 /* ExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ExportService.swift"; sourceTree = "<group>"; };
+		BB014 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/NotificationManager.swift"; sourceTree = "<group>"; };
+		BB015 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ContentView.swift"; sourceTree = "<group>"; };
+		BB016 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Dashboard/DashboardView.swift"; sourceTree = "<group>"; };
+		BB017 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Portfolio/PortfolioView.swift"; sourceTree = "<group>"; };
+		BB018 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Portfolio/AddTransactionView.swift"; sourceTree = "<group>"; };
+		BB019 /* AssetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Portfolio/AssetDetailView.swift"; sourceTree = "<group>"; };
+		BB020 /* FundsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Funds/FundsListView.swift"; sourceTree = "<group>"; };
+		BB021 /* ZakatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Zakat/ZakatView.swift"; sourceTree = "<group>"; };
+		BB022 /* LoansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Loans/LoansView.swift"; sourceTree = "<group>"; };
+		BB023 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Reports/ReportsView.swift"; sourceTree = "<group>"; };
+		BB024 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Settings/SettingsView.swift"; sourceTree = "<group>"; };
+		CC001 /* InvestTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvestTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EE001 /* InvestTracker */ = {
+			isa = PBXGroup;
+			children = (
+				BB001,
+				BB002,
+				BB003,
+				BB004,
+				BB005,
+				BB006,
+				BB007,
+				BB008,
+				BB009,
+				BB010,
+				BB011,
+				BB012,
+				BB013,
+				BB014,
+				BB015,
+				BB016,
+				BB017,
+				BB018,
+				BB019,
+				BB020,
+				BB021,
+				BB022,
+				BB023,
+				BB024,
+			);
+			path = InvestTracker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF001 /* InvestTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = GG001;
+			buildPhases = (
+				HH001 /* Sources */,
+				DD001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InvestTracker;
+			productName = InvestTracker;
+			productReference = CC001 /* InvestTracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		II001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					FF001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = GG002;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = ar;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				ar,
+				en,
+				Base,
+			);
+			mainGroup = EE001;
+			productRefGroup = EE001;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF001 /* InvestTracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		HH001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA001,
+				AA002,
+				AA003,
+				AA004,
+				AA005,
+				AA006,
+				AA007,
+				AA008,
+				AA009,
+				AA010,
+				AA011,
+				AA012,
+				AA013,
+				AA014,
+				AA015,
+				AA016,
+				AA017,
+				AA018,
+				AA019,
+				AA020,
+				AA021,
+				AA022,
+				AA023,
+				AA024,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		GG003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		GG004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		GG005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "لالتقاط صور للإيصالات والعمليات";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "لاختيار صور الإيصالات من مكتبة الصور";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "لحماية بيانات استثماراتك";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.investtracker.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		GG006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "لالتقاط صور للإيصالات والعمليات";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "لاختيار صور الإيصالات من مكتبة الصور";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "لحماية بيانات استثماراتك";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.investtracker.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		GG001 /* Build configuration list for PBXNativeTarget "InvestTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				GG005 /* Debug */,
+				GG006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		GG002 /* Build configuration list for PBXProject "InvestTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				GG003 /* Debug */,
+				GG004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = II001 /* Project object */;
+}

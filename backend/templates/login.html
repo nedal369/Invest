@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - بوابة الأعضاء</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo -->
+            <div class="login-header">
+                <div class="moon-icon">🌙</div>
+                <h1>نظام تتبع الاستثمارات</h1>
+                <p class="subtitle">بوابة الأعضاء</p>
+            </div>
+
+            <!-- Form -->
+            <form method="POST" action="{{ url_for('login') }}" class="login-form">
+                {% if error %}
+                <div class="alert alert-error">
+                    <span class="alert-icon">⚠️</span>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="access_code">رمز الوصول</label>
+                    <input
+                        type="text"
+                        id="access_code"
+                        name="access_code"
+                        placeholder="أدخل رمزك المكون من 6 أرقام"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        autofocus
+                        required
+                    >
+                    <span class="form-hint">الرمز يُمنح من مدير الصندوق</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    دخول
+                </button>
+            </form>
+
+            <p class="login-footer">
+                هذه البوابة للعرض فقط • لا يمكن تعديل أي بيانات
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-format 6-digit code
+        document.getElementById('access_code').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+        });
+    </script>
+</body>
+</html>
