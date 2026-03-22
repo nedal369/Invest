@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestTracker - نظام إدارة الاستثمارات والزكاة</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="logo-icon">📈</span>
+      <span class="logo-text">InvestTracker</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" class="nav-link active" data-view="dashboard">
+      <span class="nav-icon">🏠</span><span>لوحة التحكم</span>
+    </a></li>
+    <li><a href="#" class="nav-link" data-view="portfolio">
+      <span class="nav-icon">💼</span><span>المحفظة</span>
+    </a></li>
+    <li><a href="#" class="nav-link" data-view="funds">
+      <span class="nav-icon">🏦</span><span>الصناديق</span>
+    </a></li>
+    <li><a href="#" class="nav-link" data-view="zakat">
+      <span class="nav-icon">☪️</span><span>الزكاة</span>
+    </a></li>
+    <li><a href="#" class="nav-link" data-view="loans">
+      <span class="nav-icon">🤝</span><span>القروض الحسنة</span>
+    </a></li>
+    <li><a href="#" class="nav-link" data-view="reports">
+      <span class="nav-icon">📊</span><span>التقارير</span>
+    </a></li>
+  </ul>
+</nav>
+
+<!-- Mobile Bottom Nav -->
+<nav id="bottom-nav">
+  <a href="#" class="bottom-nav-link active" data-view="dashboard">
+    <span>🏠</span><span>الرئيسية</span>
+  </a>
+  <a href="#" class="bottom-nav-link" data-view="portfolio">
+    <span>💼</span><span>المحفظة</span>
+  </a>
+  <a href="#" class="bottom-nav-link" data-view="funds">
+    <span>🏦</span><span>الصناديق</span>
+  </a>
+  <a href="#" class="bottom-nav-link" data-view="zakat">
+    <span>☪️</span><span>الزكاة</span>
+  </a>
+  <a href="#" class="bottom-nav-link" data-view="loans">
+    <span>🤝</span><span>القروض</span>
+  </a>
+</nav>
+
+<!-- Main Content -->
+<main id="main">
+
+  <!-- ===== DASHBOARD VIEW ===== -->
+  <section id="dashboard-view" class="view active">
+    <div class="view-header">
+      <h1>لوحة التحكم</h1>
+      <button class="btn btn-primary" onclick="showModal('add-fund-modal')">+ صندوق جديد</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card green">
+        <div class="stat-label">إجمالي المحافظ</div>
+        <div class="stat-value" id="total-portfolio">0 ر.س</div>
+        <div class="stat-sub" id="portfolio-pnl"></div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">قيمة الصناديق</div>
+        <div class="stat-value" id="total-funds">0 ر.س</div>
+        <div class="stat-sub" id="total-members">0 أعضاء</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">الزكاة المستحقة</div>
+        <div class="stat-value" id="total-zakat">0 ر.س</div>
+        <div class="stat-sub" id="zakat-status"></div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-label">القروض الحسنة</div>
+        <div class="stat-value" id="total-loans">0 ر.س</div>
+        <div class="stat-sub" id="loans-status"></div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <div class="card-header">
+          <h3>توزيع المحفظة</h3>
+        </div>
+        <div class="chart-container">
+          <canvas id="portfolio-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>الصناديق النشطة</h3>
+        </div>
+        <div id="funds-summary-list" class="summary-list">
+          <div class="empty-state">لا توجد صناديق - أضف صندوقاً جديداً</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>آخر المعاملات</h3>
+      </div>
+      <div id="recent-transactions" class="transactions-list">
+        <div class="empty-state">لا توجد معاملات بعد</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO VIEW ===== -->
+  <section id="portfolio-view" class="view">
+    <div class="view-header">
+      <h1>المحفظة الاستثمارية</h1>
+      <button class="btn btn-primary" onclick="showModal('add-asset-modal')">+ إضافة أصل</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card green">
+        <div class="stat-label">إجمالي القيمة</div>
+        <div class="stat-value" id="p-total-value">0 ر.س</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">التكلفة الإجمالية</div>
+        <div class="stat-value" id="p-total-cost">0 ر.س</div>
+      </div>
+      <div class="stat-card" id="p-pnl-card">
+        <div class="stat-label">الأرباح / الخسائر</div>
+        <div class="stat-value" id="p-pnl">0 ر.س</div>
+        <div class="stat-sub" id="p-pnl-pct">0%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>الأصول</h3>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">الكل</button>
+          <button class="filter-tab" data-filter="SA_STOCK">أسهم سعودية</button>
+          <button class="filter-tab" data-filter="US_STOCK">أسهم أمريكية</button>
+          <button class="filter-tab" data-filter="GOLD">ذهب</button>
+          <button class="filter-tab" data-filter="FUND">صندوق</button>
+          <button class="filter-tab" data-filter="CASH">نقد</button>
+        </div>
+      </div>
+      <div id="assets-table" class="table-wrapper">
+        <div class="empty-state">لا توجد أصول - أضف أصلاً جديداً</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FUNDS VIEW ===== -->
+  <section id="funds-view" class="view">
+    <div class="view-header">
+      <h1>الصناديق الاستثمارية</h1>
+      <button class="btn btn-primary" onclick="showModal('add-fund-modal')">+ صندوق جديد</button>
+    </div>
+
+    <div id="funds-list" class="funds-grid">
+      <div class="empty-state">لا توجد صناديق - أضف صندوقاً جديداً</div>
+    </div>
+
+    <!-- Fund Detail Panel -->
+    <div id="fund-detail" class="fund-detail hidden">
+      <div class="fund-detail-header">
+        <button class="btn btn-ghost" onclick="closeFundDetail()">← رجوع</button>
+        <h2 id="fund-detail-name"></h2>
+        <div class="fund-detail-actions">
+          <button class="btn btn-secondary" onclick="showAddMemberModal()">+ عضو</button>
+          <button class="btn btn-primary" onclick="showRecordPaymentModal()">تسجيل دفعة</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card green">
+          <div class="stat-label">صافي قيمة الوحدة</div>
+          <div class="stat-value" id="fd-nav">0 ر.س</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">إجمالي الوحدات</div>
+          <div class="stat-value" id="fd-units">0</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-label">القيمة الإجمالية</div>
+          <div class="stat-value" id="fd-total">0 ر.س</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-label">عدد الأعضاء</div>
+          <div class="stat-value" id="fd-members-count">0</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>الأعضاء</h3>
+        </div>
+        <div id="fund-members-list" class="members-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>سجل المدفوعات</h3>
+        </div>
+        <div id="fund-payments-list" class="payments-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ZAKAT VIEW ===== -->
+  <section id="zakat-view" class="view">
+    <div class="view-header">
+      <h1>حساب الزكاة</h1>
+    </div>
+
+    <div class="card zakat-info-card">
+      <div class="zakat-info-row">
+        <div class="zakat-info-item">
+          <span class="label">نصاب الزكاة (85 جرام ذهب)</span>
+          <span class="value" id="nisab-value">يحسب...</span>
+        </div>
+        <div class="zakat-info-item">
+          <span class="label">سعر الذهب (جرام)</span>
+          <input type="number" id="gold-price" class="inline-input" value="220" onchange="recalcZakat()"> ر.س
+        </div>
+        <div class="zakat-info-item">
+          <span class="label">نسبة الزكاة</span>
+          <span class="value">2.5%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card green">
+        <div class="stat-label">إجمالي الوعاء الزكوي</div>
+        <div class="stat-value" id="z-total-base">0 ر.س</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">الزكاة المستحقة</div>
+        <div class="stat-value" id="z-total-due">0 ر.س</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">الزكاة المدفوعة</div>
+        <div class="stat-value" id="z-total-paid">0 ر.س</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-label">المتبقي للدفع</div>
+        <div class="stat-value" id="z-total-remaining">0 ر.س</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>تفاصيل الزكاة</h3>
+        <button class="btn btn-primary btn-sm" onclick="showModal('add-zakat-modal')">+ تسجيل زكاة</button>
+      </div>
+      <div id="zakat-breakdown" class="zakat-breakdown">
+        <div class="empty-state">أضف أصولاً لحساب الزكاة</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>سجل دفعات الزكاة</h3>
+      </div>
+      <div id="zakat-payments-list" class="payments-list">
+        <div class="empty-state">لا توجد دفعات مسجلة</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOANS VIEW ===== -->
+  <section id="loans-view" class="view">
+    <div class="view-header">
+      <h1>القروض الحسنة</h1>
+      <button class="btn btn-primary" onclick="showModal('add-loan-modal')">+ قرض جديد</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-label">إجمالي القروض</div>
+        <div class="stat-value" id="l-total">0 ر.س</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">المبلغ المتبقي</div>
+        <div class="stat-value" id="l-remaining">0 ر.س</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">المدفوع</div>
+        <div class="stat-value" id="l-paid">0 ر.س</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-label">الأقساط المتأخرة</div>
+        <div class="stat-value" id="l-overdue">0</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>القروض النشطة</h3>
+      </div>
+      <div id="loans-list" class="loans-list">
+        <div class="empty-state">لا توجد قروض - أضف قرضاً جديداً</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REPORTS VIEW ===== -->
+  <section id="reports-view" class="view">
+    <div class="view-header">
+      <h1>التقارير</h1>
+      <button class="btn btn-secondary" onclick="exportData()">📥 تصدير البيانات</button>
+    </div>
+
+    <div class="reports-grid">
+      <div class="card">
+        <div class="card-header"><h3>ملخص المحفظة</h3></div>
+        <div class="chart-container">
+          <canvas id="assets-chart"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>أداء الصناديق</h3></div>
+        <div id="funds-performance" class="performance-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>تقرير الزكاة السنوي</h3></div>
+      <div id="zakat-annual-report" class="report-content"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== MODALS ===== -->
+
+<!-- Add Asset Modal -->
+<div id="add-asset-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>إضافة أصل جديد</h3>
+      <button class="modal-close" onclick="closeModal('add-asset-modal')">✕</button>
+    </div>
+    <form id="add-asset-form" onsubmit="submitAddAsset(event)">
+      <div class="form-group">
+        <label>اسم الأصل</label>
+        <input type="text" id="asset-name" placeholder="مثال: أرامكو، أبل، ذهب..." required>
+      </div>
+      <div class="form-group">
+        <label>رمز التداول (اختياري)</label>
+        <input type="text" id="asset-symbol" placeholder="مثال: 2222.SR، AAPL">
+      </div>
+      <div class="form-group">
+        <label>نوع الأصل</label>
+        <select id="asset-type" required>
+          <option value="SA_STOCK">سهم سعودي</option>
+          <option value="US_STOCK">سهم أمريكي</option>
+          <option value="FUND">صندوق استثماري</option>
+          <option value="ETF">ETF</option>
+          <option value="GOLD">ذهب</option>
+          <option value="CASH">نقد</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>الكمية / الوحدات</label>
+          <input type="number" id="asset-quantity" step="0.0001" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>سعر الشراء</label>
+          <input type="number" id="asset-buy-price" step="0.01" min="0" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>السعر الحالي</label>
+        <input type="number" id="asset-current-price" step="0.01" min="0" required>
+      </div>
+      <div class="form-group">
+        <label>تاريخ الشراء</label>
+        <input type="date" id="asset-date" required>
+      </div>
+      <div class="form-group">
+        <label>ملاحظات (اختياري)</label>
+        <textarea id="asset-notes" rows="2" placeholder="أي ملاحظات إضافية..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('add-asset-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">إضافة</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Fund Modal -->
+<div id="add-fund-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>إنشاء صندوق جديد</h3>
+      <button class="modal-close" onclick="closeModal('add-fund-modal')">✕</button>
+    </div>
+    <form id="add-fund-form" onsubmit="submitAddFund(event)">
+      <div class="form-group">
+        <label>اسم الصندوق</label>
+        <input type="text" id="fund-name" placeholder="مثال: صندوق العائلة، صندوق الأصدقاء..." required>
+      </div>
+      <div class="form-group">
+        <label>وصف الصندوق</label>
+        <textarea id="fund-desc" rows="2" placeholder="وصف مختصر للصندوق..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>قيمة الوحدة الابتدائية (ر.س)</label>
+          <input type="number" id="fund-unit-value" value="1000" step="1" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>الاشتراك الشهري (ر.س)</label>
+          <input type="number" id="fund-monthly" value="500" step="1" min="0" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>تاريخ التأسيس</label>
+        <input type="date" id="fund-start-date" required>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('add-fund-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">إنشاء الصندوق</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Member Modal -->
+<div id="add-member-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>إضافة عضو جديد</h3>
+      <button class="modal-close" onclick="closeModal('add-member-modal')">✕</button>
+    </div>
+    <form id="add-member-form" onsubmit="submitAddMember(event)">
+      <div class="form-group">
+        <label>اسم العضو</label>
+        <input type="text" id="member-name" placeholder="الاسم الكامل" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>عدد الوحدات</label>
+          <input type="number" id="member-units" value="1" step="0.5" min="0.5" required>
+        </div>
+        <div class="form-group">
+          <label>رمز الدخول (6 أرقام)</label>
+          <input type="text" id="member-code" maxlength="6" pattern="[0-9]{6}" placeholder="123456" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>تاريخ الانضمام</label>
+        <input type="date" id="member-join-date" required>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('add-member-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">إضافة العضو</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Record Payment Modal -->
+<div id="record-payment-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>تسجيل دفعة</h3>
+      <button class="modal-close" onclick="closeModal('record-payment-modal')">✕</button>
+    </div>
+    <form id="record-payment-form" onsubmit="submitRecordPayment(event)">
+      <div class="form-group">
+        <label>العضو</label>
+        <select id="payment-member" required></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>المبلغ (ر.س)</label>
+          <input type="number" id="payment-amount" step="0.01" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>الشهر</label>
+          <input type="month" id="payment-month" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>حالة الدفع</label>
+        <select id="payment-status">
+          <option value="paid">مدفوع</option>
+          <option value="partial">جزئي</option>
+          <option value="pending">معلق</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ملاحظات</label>
+        <textarea id="payment-notes" rows="2"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('record-payment-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">تسجيل</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Zakat Modal -->
+<div id="add-zakat-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>تسجيل دفعة زكاة</h3>
+      <button class="modal-close" onclick="closeModal('add-zakat-modal')">✕</button>
+    </div>
+    <form id="add-zakat-form" onsubmit="submitAddZakat(event)">
+      <div class="form-group">
+        <label>السنة الهجرية</label>
+        <input type="text" id="zakat-year" placeholder="مثال: 1446" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>وعاء الزكاة (ر.س)</label>
+          <input type="number" id="zakat-base" step="0.01" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>مبلغ الزكاة (ر.س)</label>
+          <input type="number" id="zakat-amount" step="0.01" min="0" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>الحالة</label>
+        <select id="zakat-payment-status">
+          <option value="paid">مدفوعة</option>
+          <option value="calculated">محسوبة (لم تُدفع)</option>
+          <option value="partial">دفع جزئي</option>
+          <option value="waived">مُسقطة</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>تاريخ الدفع</label>
+        <input type="date" id="zakat-pay-date">
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('add-zakat-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">تسجيل</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Loan Modal -->
+<div id="add-loan-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>قرض حسن جديد</h3>
+      <button class="modal-close" onclick="closeModal('add-loan-modal')">✕</button>
+    </div>
+    <form id="add-loan-form" onsubmit="submitAddLoan(event)">
+      <div class="form-group">
+        <label>اسم المقترض</label>
+        <input type="text" id="loan-borrower" placeholder="اسم العضو المقترض" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>مبلغ القرض (ر.س)</label>
+          <input type="number" id="loan-amount" step="0.01" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>عدد الأقساط (أشهر)</label>
+          <input type="number" id="loan-installments" value="12" min="1" max="60" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>تاريخ البدء</label>
+        <input type="date" id="loan-start-date" required>
+      </div>
+      <div class="form-group">
+        <label>الغرض من القرض</label>
+        <textarea id="loan-purpose" rows="2" placeholder="سبب طلب القرض..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('add-loan-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">منح القرض</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Asset Modal -->
+<div id="edit-asset-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>تعديل الأصل</h3>
+      <button class="modal-close" onclick="closeModal('edit-asset-modal')">✕</button>
+    </div>
+    <form id="edit-asset-form" onsubmit="submitEditAsset(event)">
+      <input type="hidden" id="edit-asset-id">
+      <div class="form-group">
+        <label>اسم الأصل</label>
+        <input type="text" id="edit-asset-name" required>
+      </div>
+      <div class="form-group">
+        <label>السعر الحالي</label>
+        <input type="number" id="edit-asset-price" step="0.01" min="0" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>الكمية</label>
+          <input type="number" id="edit-asset-qty" step="0.0001" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>سعر الشراء</label>
+          <input type="number" id="edit-asset-buy" step="0.01" min="0" required>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('edit-asset-modal')">إلغاء</button>
+        <button type="submit" class="btn btn-primary">حفظ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- Scripts -->
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
