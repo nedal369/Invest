@@ -31,6 +31,7 @@
 		AA022 /* LoansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB022 /* LoansView.swift */; };
 		AA023 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB023 /* ReportsView.swift */; };
 		AA024 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB024 /* SettingsView.swift */; };
+		AA025 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB025 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		BB023 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Reports/ReportsView.swift"; sourceTree = "<group>"; };
 		BB024 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Settings/SettingsView.swift"; sourceTree = "<group>"; };
 		CC001 /* InvestTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvestTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB025 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				BB022,
 				BB023,
 				BB024,
+				BB025,
 			);
 			path = InvestTracker;
 			sourceTree = "<group>";
@@ -112,6 +115,7 @@
 			buildPhases = (
 				HH001 /* Sources */,
 				DD001 /* Frameworks */,
+				HH002 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +193,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		HH002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA025 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		GG003 /* Debug */ = {
