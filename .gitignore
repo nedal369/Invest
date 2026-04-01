@@ -1,5 +1,5 @@
 # Xcode
-*.xcworkspace
+/*.xcworkspace
 xcuserdata/
 DerivedData/
 *.moved-aside
